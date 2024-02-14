@@ -1,0 +1,152 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Layout.master.cs" Inherits="Layout" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Programación de Cursos - UAGM</title>
+     <meta http-equiv=”Content-Type” content=”text/html; charset=ISO-8859-1″ />
+    <%--<meta charset="utf-8" />--%>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/favicon.ico" />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png" />
+    <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+    <%-- fooTable --%>
+    <link href="assets/css/fooTable.css" rel="stylesheet" />
+    <!--     Fonts and icons     -->
+    <link rel="icon" type="image/png" href="assets/img/faviconV2.png">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous" />
+    <link href="assets/css/all.min.css" rel="stylesheet" />
+    <link href="assets/css/animate.css" rel="stylesheet" />
+    <!-- Material Kit CSS -->
+    <link href="assets/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
+    <link href="assets/css/main.css" rel="stylesheet" />
+    <%--<link href="assets/css/demo.css" rel="stylesheet" />--%>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.28.12/dist/sweetalert2.all.min.js"></script>
+    <%--<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>--%>
+    <script src="assets/js/main.js"></script>
+    <asp:Literal ID="ltlToogleMenu" runat="server"></asp:Literal>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style>
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+</style>
+</head>
+<body>
+    <form id="form1" runat="server" autocomplete="off" class="m-0">
+                <div class="content">
+                    <div class="container-fluid">
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <nav class="text-right">
+                            <ul>
+                                <li style="text-align: right;">
+                                    <small id="PowerBy"></small>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </footer>
+
+    </form>
+    <%--<span class="ir-arriba fas fa-arrow-up"></span>--%>
+    <div class="content-loader">
+        <div class="loader"></div>
+        <div onclick="$('.content-loader').fadeOut(1000);" class="btn-cerrar-loading btn btn-round btn-danger">
+            <a><i class="fas fa-times-circle"></i></a>
+        </div>
+    </div>
+
+    <script src="assets/js/core/jquery.min.js"></script>
+    <script src="assets/js/core/popper.min.js"></script>
+    <script src="assets/js/core/bootstrap-material-design.min.js"></script>
+    <script type="text/javascript" src="assets/js/fooTable.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.2/js/jquery.tablesorter.min.js"></script>
+    <script>
+        document.getElementById("PowerBy").innerHTML = '© POWERED BY | OCIT ' + (new Date).getFullYear() + '<span class="prog"> Programación y Desarrollo</span>';
+
+        $(".btnLoad").click(function () {
+            $('.content-loader').fadeIn(0);
+            setTimeout(function () { $('.content-loader').fadeOut(1000); }, 200000);
+        });
+
+        $(document).ready(function () {
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+            })
+        });
+
+
+        $(".btnRightClick").mousedown(function (event) {
+            if (event.which === 3) {
+                $(this).children('.card-footer').children('.dropdown').children('#dropdownMenuButton').click();
+            }
+        });
+
+        function nombrePaginaActual() {
+            var rutaAbsoluta = self.location.href;
+            var posicionUltimaBarra = rutaAbsoluta.lastIndexOf("/");
+            var rutaRelativa = rutaAbsoluta.substring(posicionUltimaBarra + "/".length, rutaAbsoluta.length);
+
+            //Ocultamos el search menu
+            if (rutaRelativa.includes('index') == false) {
+                $('#searchBigMenu').hide();
+            }
+            return '#' + rutaRelativa.replace('.aspx', '');
+        }
+
+        //Aplicamos la clase active al side menu. Hay que colocar el mismo nombre de url al id de la etiqueta.
+        $(nombrePaginaActual()).addClass('active');
+
+        $('[data-toggle="tooltip"]').tooltip();
+
+        $(function () {
+            $('.table').footable();
+            $(".table").tablesorter();
+        });
+
+        function OnClientPopulating(sender, e) {
+            sender._element.className = "loadAutoComplete form-control";
+        };
+        function OnClientCompleted(sender, e) {
+            sender._element.className = "form-control";
+        };
+
+    </script>
+</body>
+</html>

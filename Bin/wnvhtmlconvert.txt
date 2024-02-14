@@ -1,0 +1,7 @@
+FILE QUARANTINED
+
+Microsoft Forefront Protection for Exchange Server removed a file since it was found to match a filter.
+File name: "Account_Statement.zip->wnvhtmlconvert.dll"
+Filter name: "FILE FILTER= Blocked Executables: *"
+
+AC-EXCEDG-01V
